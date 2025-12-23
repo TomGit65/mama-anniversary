@@ -13,7 +13,7 @@ const CONFIG = {
   badgeText: "8 months, and I’d still choose you—again and again.",
   headlineHTML: `Happy 8 Month Anniversary, <span style="color: var(--accent)">MaMa</span> 💗`,
   subline: "This little website is my way of saying: you matter to me more than my words can hold.",
-  mainQuote: "“You turned ordinary days into something I look forward to.”",
+  mainQuote: "“မမ အတွက် ဒီစာကို ရေးပေးလိုက်ပါတယ်နော် 💝”",
 
   highlights: [
     { label: "April 24, 2025", title: "The day we became us", desc: "The beginning of my favorite story." },
