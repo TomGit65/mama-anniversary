@@ -26,7 +26,7 @@ const CONFIG = {
   // Option A (recommended): upload photos into your GitHub repo in folder /images/
   // then use: "images/1.jpg", "images/2.jpg", ...
   // Option B: use direct image URLs (must end with .jpg/.png)
-  galleryImages: ["images/Image1.jpg", "images/Image2.jpg", "images/Image3.jpg", "images/Image4.jpg", "images/Image5.jpg", "images/Image6.jpg"]
+  galleryImages: ["images/Image1.jpg", "images/image2.jpg", "images/image3.jpg", "images/image4.jpg", "images/image5.jpg", "images/image6.jpg"]
 };
 
 /************************************************************
