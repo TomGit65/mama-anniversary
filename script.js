@@ -22,11 +22,15 @@ const CONFIG = {
     { label: "Month 8", title: "Still you. Still me. Still us.", desc: "And I’m grateful—every single day." }
   ],
 
-  // ✅ Add photos here:
-  // Option A (recommended): upload photos into your GitHub repo in folder /images/
-  // then use: "images/1.jpg", "images/2.jpg", ...
-  // Option B: use direct image URLs (must end with .jpg/.png)
-  galleryImages: ["images/Image1.jpg", "images/image2.jpg", "images/image3.jpg", "images/image4.jpg", "images/image5.jpg", "images/image6.jpg"]
+  // Make sure filenames match EXACTLY on GitHub (case-sensitive)
+  galleryImages: [
+    "images/Image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg",
+    "images/image5.jpg",
+    "images/image6.jpg"
+  ]
 };
 
 /************************************************************
@@ -118,9 +122,14 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
     box.innerHTML = `<span>Photo ${idx+1}<br>add in script.js</span><img alt="photo ${idx+1}">`;
 
     const img = box.querySelector("img");
+
     if(src && src.trim()){
+      img.onload = () => box.classList.add("hasImg");
+      img.onerror = () => {
+        // Leave placeholder if missing
+        box.classList.remove("hasImg");
+      };
       img.src = src.trim();
-      box.classList.add("hasImg");
     }
 
     galleryEl.appendChild(box);
@@ -159,11 +168,16 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
 })();
 
 /************************************************************
- * Letter modal (fixed)
+ * Letter modal (fixed) + 🌸 flower celebration
  ************************************************************/
 (function letterModal(){
   const modal = $("letterModal");
-  $("openLetterBtn").addEventListener("click", () => modal.classList.add("show"));
+
+  $("openLetterBtn").addEventListener("click", () => {
+    modal.classList.add("show");
+    flowerBurst(); // 🌸 celebration
+  });
+
   $("closeModalBtn").addEventListener("click", () => modal.classList.remove("show"));
   modal.addEventListener("click", (e) => {
     if (e.target === modal) modal.classList.remove("show");
@@ -171,16 +185,53 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
 })();
 
 /************************************************************
- * Promise board (session-only)
+ * 🌸 Flower celebration function (as requested)
+ ************************************************************/
+function flowerBurst(){
+  const wrap = $("flowers");
+  if(!wrap) return;
+
+  // clear old flowers
+  wrap.innerHTML = "";
+
+  const emojis = ["🌸","🌺","🌷","💐","🌼"];
+  const count = 26;
+
+  for(let i=0;i<count;i++){
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+
+    const left = Math.random()*100;
+    const size = 16 + Math.random()*22;
+    const duration = 2.8 + Math.random()*2.4; // 2.8s–5.2s
+    const drift = (Math.random()*160 - 80) + "px";
+    const delay = Math.random()*0.25;
+
+    f.style.left = left + "vw";
+    f.style.fontSize = size + "px";
+    f.style.animationDuration = duration + "s";
+    f.style.animationDelay = delay + "s";
+    f.style.setProperty("--drift", drift);
+
+    wrap.appendChild(f);
+
+    // cleanup after animation ends
+    setTimeout(() => f.remove(), (duration + delay) * 1000 + 200);
+  }
+}
+
+/************************************************************
+ * Promise board (session-only, no saving) ✅ FIXED
  ************************************************************/
 (function promiseBoard(){
   const promisesEl = $("promises");
   let promises = [];
 
-  function render(){
+  function renderPromises(){
     promisesEl.innerHTML = "";
 
-    if(!promises.length){
+    if (!promises.length){
       const empty = document.createElement("div");
       empty.className = "event";
       empty.innerHTML = `
@@ -214,7 +265,7 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
       btn.addEventListener("click", () => {
         const idx = Number(btn.getAttribute("data-del"));
         promises.splice(idx, 1);
-        render();
+        renderPromises();
       });
     });
   }
@@ -230,31 +281,29 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
       text: text.trim() || "Always."
     });
 
-    render();
+    renderPromises();
     toast("Added 💗");
   });
 
   $("clearPromisesBtn").addEventListener("click", () => {
-    if (!confirm("Clear all promises?")) return;
+    if (!confirm("Clear all promises (session only)?")) return;
     promises = [];
-    render();
+    renderPromises();
     toast("Cleared");
   });
 
-  render();
+  renderPromises();
 })();
 
 /************************************************************
- * Confetti
+ * Confetti ✅ FIXED (real burst again)
  ************************************************************/
 (function confetti(){
   const celebrateBtn = $("celebrateBtn");
   const canvas = $("confetti");
   const ctx = canvas.getContext("2d");
-  let W = 0, H = 0;
-  let pieces = [];
-  let anim = null;
 
+  let W, H;
   function resize(){
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
@@ -262,9 +311,12 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
   window.addEventListener("resize", resize);
   resize();
 
+  let pieces = [];
+  let anim = null;
+
   function burst(){
-    pieces = [];
     const count = 180;
+    pieces = [];
     for(let i=0;i<count;i++){
       pieces.push({
         x: W/2 + (Math.random()*120-60),
@@ -311,7 +363,7 @@ $("startDateText").textContent = startDate.toLocaleDateString(undefined, {
 })();
 
 /************************************************************
- * Toast
+ * Toast ✅ RESTORED
  ************************************************************/
 let toastTimer = null;
 function toast(msg){
