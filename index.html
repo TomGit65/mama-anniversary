@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>8 Months with MaMa 💗</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="hearts" id="hearts"></div>
+
+  <header>
+    <div class="badge">
+      <span class="dot"></span>
+      <span id="badgeText">8 months, and I’d still choose you—again and again.</span>
+    </div>
+
+    <h1 id="headline">Happy 8 Month Anniversary, <span class="accent">MaMa</span> 💗</h1>
+
+    <p class="sub" id="subline">
+      This little website is my way of saying: you matter to me more than my words can hold.
+    </p>
+
+    <div class="glowLine"></div>
+  </header>
+
+  <main>
+    <!-- LEFT -->
+    <section class="card">
+      <div class="cardHeader">
+        <div>
+          <p class="cardTitle">Our Time Together ⏳</p>
+          <p class="cardHint">Live counter since our special date.</p>
+        </div>
+        <div class="btnRow">
+          <button class="primary" id="celebrateBtn">Celebrate 🎉</button>
+          <button id="musicBtn">Music: Off ♪</button>
+        </div>
+      </div>
+
+      <div class="cardBody">
+        <div class="grid2">
+          <div class="stat">
+            <div class="statLabel">Days</div>
+            <div class="statValue" id="days">0</div>
+            <div class="statSmall" id="sinceText">Since: —</div>
+          </div>
+
+          <div class="stat">
+            <div class="statLabel">Hours</div>
+            <div class="statValue" id="hours">0</div>
+            <div class="statSmall">Plus minutes & seconds updating live</div>
+          </div>
+
+          <div class="stat">
+            <div class="statLabel">Minutes</div>
+            <div class="statValue" id="minutes">0</div>
+            <div class="statSmall">Every minute with you feels softer</div>
+          </div>
+
+          <div class="stat">
+            <div class="statLabel">Seconds</div>
+            <div class="statValue" id="seconds">0</div>
+            <div class="statSmall">And I still miss you in between</div>
+          </div>
+        </div>
+
+        <div class="sectionSpacing">
+          <p class="quote" id="mainQuote">“You turned ordinary days into something I look forward to.”</p>
+          <p class="sig">— From <span id="fromName">Mg</span> to <span id="toName">MaMa</span></p>
+
+          <div class="btnRow">
+            <button id="openLetterBtn">Open My Letter 💌</button>
+            <button class="danger" id="resetLetterBtn">Reset Letter</button>
+          </div>
+        </div>
+
+        <!-- MUSIC (YouTube audio-only style) -->
+        <div class="musicCard">
+          <div class="musicTop">
+            <div>
+              <p class="cardTitle" style="margin:0;">Our Song 🎵</p>
+              <p class="cardHint" style="margin:6px 0 0;">
+                Audio-only style: video hidden, but sound plays.
+              </p>
+            </div>
+          </div>
+
+          <!-- Hidden YouTube player (audio-only style) -->
+          <div class="embedWrap" id="embedWrap" style="display:none;">
+            <iframe
+              id="songEmbed"
+              title="Our Song"
+              allow="autoplay; encrypted-media"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy">
+            </iframe>
+          </div>
+
+          <!-- Local MP3 player (not used here, but kept) -->
+          <div class="audioWrap" id="audioWrap" style="display:none;">
+            <audio id="bgm" controls>
+              <source id="bgmSource" src="" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <p class="smallNote" id="musicNote">
+            Tap the button to play the song.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT -->
+    <aside class="card">
+      <div class="cardHeader">
+        <div>
+          <p class="cardTitle">Our Story Highlights ✨</p>
+          <p class="cardHint">Tiny moments that mean everything.</p>
+        </div>
+      </div>
+
+      <div class="cardBody">
+        <div class="timeline" id="timeline"></div>
+
+        <div class="sectionSpacing">
+          <p class="cardTitle" style="margin:0 0 8px;">Mini Gallery 🖼️</p>
+          <p class="cardHint" style="margin:0 0 12px;">Add your photos by editing the image URLs in script.js.</p>
+          <div class="gallery" id="gallery"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- FULL WIDTH -->
+    <section class="card fullWidth">
+      <div class="cardHeader">
+        <div>
+          <p class="cardTitle">Promise Board 🤝</p>
+          <p class="cardHint">Write a promise and save it (it stays in the browser).</p>
+        </div>
+        <div class="btnRow">
+          <button id="addPromiseBtn" class="primary">Add Promise ➕</button>
+          <button id="clearPromisesBtn" class="danger">Clear</button>
+        </div>
+      </div>
+
+      <div class="cardBody">
+        <div id="promises" class="timeline"></div>
+        <p class="smallNote">
+          Tip: This uses localStorage, so your promises stay even after refresh (on the same device/browser).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Made with love. Not perfect, but real. 💗
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="letterModal" aria-hidden="true">
+    <div class="modalBox">
+      <div class="modalTop">
+        <h3 id="modalTitle">My Letter to You 💌</h3>
+        <button class="x" id="closeModalBtn" title="Close">×</button>
+      </div>
+      <div class="modalBody">
+        <textarea id="letterArea" placeholder="Write your letter here..."></textarea>
+
+        <div class="btnRow" style="margin-top:12px;">
+          <button class="primary" id="saveLetterBtn">Save Letter</button>
+          <button id="copyLetterBtn">Copy</button>
+        </div>
+
+        <p class="smallNote">Your letter is saved only on this device/browser (not uploaded anywhere).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- YouTube API script (needed for audio control) -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
