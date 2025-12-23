@@ -26,8 +26,6 @@ body{
   overflow-x:hidden;
 }
 
-.accent{ color: var(--accent); }
-
 #confetti{
   position:fixed;
   inset:0;
@@ -76,11 +74,8 @@ header{
   font-size: 13px;
   letter-spacing:.2px;
 }
-
 .dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
+  width:9px; height:9px; border-radius:50%;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   box-shadow: 0 0 16px rgba(255,77,166,.45);
 }
@@ -124,7 +119,7 @@ main{
   border:1px solid var(--stroke);
   background: var(--card);
   border-radius: var(--radius);
-  box-shadow: 0 18px 60px rgba(0,0,0,.55);
+  box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
   overflow:hidden;
 }
@@ -290,13 +285,6 @@ button.danger{
 .ph.hasImg img{ display:block; }
 .ph.hasImg span{ display:none; }
 
-.musicCard{
-  margin-top:16px;
-  padding:14px;
-  border:1px solid var(--stroke);
-  border-radius: 16px;
-  background: rgba(0,0,0,.16);
-}
 .smallNote{
   color:var(--muted);
   font-size:12px;
@@ -352,25 +340,10 @@ footer{
 }
 .modalBody{ padding: 14px; }
 
-textarea{
-  width:100%;
-  min-height: 150px;
-  resize: vertical;
-  padding: 12px;
-  border-radius: 16px;
-  border:1px solid rgba(255,255,255,.18);
-  background: rgba(0,0,0,.22);
-  color:var(--text);
-  outline:none;
-  line-height:1.5;
-  font-size: 14px;
+/* Fixed letter */
+.fixedLetter{
+  color: rgba(255,255,255,.92);
+  font-size: 15px;
+  line-height: 1.75;
 }
-
-/* ✅ YouTube "audio-only" style (hide video) */
-.embedWrap iframe{
-  width: 1px !important;
-  height: 1px !important;
-  opacity: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-}
+.fixedLetter p{ margin: 0 0 12px; }
